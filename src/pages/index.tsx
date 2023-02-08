@@ -1,15 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
+import {Inter} from '@next/font/google'
+import Layout from "@/components/Layout";
+import Catalog from "@/components/Catalog";
+import HighlightCategory from "@/components/HighlightCategory";
+import Hero from "@/components/Hero/Hero";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({subsets: ['latin']})
 
 export default function Home() {
-  return (
-    <>
-      <h1 className="text-3xl font-bold ">
-        Hello world!
-      </h1>
-    </>
-  )
+    return (
+        <>
+            <Layout>
+                <Hero />
+                <HighlightCategory/>
+                <Catalog/>
+
+            </Layout>
+        </>
+    )
 }
