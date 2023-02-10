@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/Button";
-import BasicInput from "@/components/Layout/BasicInput";
+import BasicInput from "@/components/Input/BasicInput";
 import Link from "next/link";
 
 const SigninPage = () => {
