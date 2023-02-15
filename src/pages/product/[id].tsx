@@ -16,7 +16,7 @@ const ProductDetailPage = () => {
                             <div className="flex flex-wrap">
                                 <img alt="ecommerce"
                                      className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                                     src="https://picsum.photos/400"/>
+                                    src="https://picsum.photos/400"/>
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                                     <div className="pb-5">
                                         <div className="mb-2 md:mb-2.5 block -mt-1.5" role="button">
