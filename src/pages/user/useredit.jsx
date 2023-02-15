@@ -22,7 +22,7 @@ export default function EditUserForm() {
                 </div>
                 <div className="flex flex-col pt-4">
                     <form className="max-w-md mx-auto">
-                        <div className="mb-4">
+                        <div className="mb-6">
                             <label className="block font-bold mb-2" htmlFor="full-name">
                             Full Name
                             </label>
@@ -33,7 +33,7 @@ export default function EditUserForm() {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block font-bold mb-2" htmlFor="gender">
+                            <label className="block font-bold smb-2" htmlFor="gender">
                             Gender
                             </label>
                             <select
