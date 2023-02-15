@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
 
 export const authOptions: NextAuthOptions = {
-    secret: "secret",
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -13,32 +13,13 @@ export const authOptions: NextAuthOptions = {
             },
             // @ts-ignore
             async authorize(credentials, req) {
-
-                // const response = await axios.post('http://localhost:8080/login', {
-                //     username: credentials.username,
-                //     password:  credentials.password
-                // }).catch(err => {
-                //     console.log("error >> ", err)
-                //     throw new Error('Invalid credentials');
-                // });
-                const response = {
-                    data: {
-                        data: {
-                            token_type: "Bearer",
-                            token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc2MDQ4NjgxLCJpYXQiOjE2NzYwMTI2ODEsInVzZXJuYW1lIjoiYWRtaW4ifQ.k8GCYQA1Yf96jz9QxVECepQXzlTLyeNqVhWahuNZIpg",
-                            expired_in: 3600,
-                            user: {
-                                id: 4,
-                                username: "username",
-                                fullname: "Nellie Kiehn MD",
-                                email: "Rene_Beer@yahoo.com",
-                                photo: "http://placeimg.com/640/480",
-                                role: "admin",
-                                address: "8887 Reagan Locks",
-                            }
-                        }
-                    }
-                }
+                const baseURL = process.env.NEXTAUTH_API_URL
+                const response = await axios.post(`${baseURL}/login`, {
+                    username: credentials?.username,
+                    password:  credentials?.password
+                }).catch(err => {
+                    throw new Error(err.response.data.error ?? err.message);
+                });
 
                 const user = response.data.data
 
@@ -51,7 +32,8 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     pages: {
-        signIn: '/auth/signin'
+        signIn: '/auth/signin',
+        error: '/auth/signin',
     },
     callbacks: {
         async jwt({ token, user, profile, account, isNewUser }) {
@@ -63,6 +45,7 @@ export const authOptions: NextAuthOptions = {
         },
         async session({ session, token, user }) {
             session.user = token.user
+            session.access_token = token.access_token
             return session
         }
     }
