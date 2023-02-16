@@ -67,7 +67,6 @@ const SigninPage = () => {
                 <meta property="og:title" content="Signup" key="title"/>
             </Head>
             <Layout>
-
                 <div className="container w-full px-5 py-24 mx-auto flex justify-center">
                     <div
                         className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0 relative z-10 shadow-xl">
