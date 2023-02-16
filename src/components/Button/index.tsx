@@ -5,15 +5,17 @@ import {cn} from '@/utils'
 export interface ButtonProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     isLoading?: boolean;
+    onClickHandler?:any
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({type, className, isLoading, ...props}, ref) => {
+    ({type, className, isLoading, onClickHandler, ...props}, ref) => {
         return (
             <>
                 <button
                     type={type}
                     ref={ref}
+                    onClick={onClickHandler}
                     className={cn("p-2.5 px-9 text-sm font-medium text-white bg-sky-900 rounded-lg border border-sky-900 hover:bg-blue-900", className)}>
                     {
                         isLoading ? <span><i className="bx bx-loader bx-spin" /> </span> : <span>{props.children}</span>

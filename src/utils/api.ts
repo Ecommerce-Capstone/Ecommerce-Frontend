@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import {getSession, signOut} from 'next-auth/react';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL || 'http://localhost:8080';
+const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL || 'http://localhost:8080/';
 
 const ApiClient = () => {
     const defaultOptions = {
-        baseURL,
+        baseURL: baseURL,
     };
 
     const instance = axios.create(defaultOptions);
@@ -20,9 +20,13 @@ const ApiClient = () => {
 
     instance.interceptors.response.use(
         (response) => {
+
             return response;
         },
         (error) => {
+            if (error.response.status === 403){
+                signOut()
+            }
             console.log(`error`, error);
         },
     );
