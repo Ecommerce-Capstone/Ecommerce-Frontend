@@ -4,8 +4,9 @@ import Layout from "@/components/Layout";
 import { Fragment } from "react";
 import { ArrowCircleLeftIcon } from "@heroicons/react/solid";
 import Image from "next/image";
+import Link from 'next/link';
 
-export default function NotFound() {
+export default function Custom404() {
 return (
     <>
     <Layout>
