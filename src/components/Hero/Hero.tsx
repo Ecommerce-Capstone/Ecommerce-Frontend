@@ -23,7 +23,7 @@ const Hero = () => {
                                 <div className="w-full">
                                     <div className="relative">
                                         <input type="text" className="rounded bg-gray-100 p-4 text-base pl-12 w-full"
-                                               placeholder="Search" />
+                                                placeholder="Search" />
                                             <div className="absolute top-5 left-4 text-gray-400 pr-4">
                                                 <i className="bx bx-search text-xl" />
                                             </div>
