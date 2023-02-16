@@ -3,6 +3,7 @@ import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Link from "next/link";
 import {signIn, signOut, useSession} from "next-auth/react";
+import UserDropdown from "@/components/Navbar/UserDropdown";
 
 const Navbar = () => {
     const { data, status } = useSession()
@@ -26,10 +27,7 @@ const Navbar = () => {
                         </button>
                     }
                     {
-                        status == "authenticated" && <button type="button" onClick={() => signOut()} className="mr-5 hover:text-gray-900 cursor-pointer">
-                            <i className="bx bx-log-out text-xl mr-2" />
-                            <span className="hidden md:inline-block">Logout</span>
-                        </button>
+                        status == "authenticated" && <UserDropdown name={data?.user.fullname} />
                     }
                     {
                         status == "unauthenticated" && <button type="button" onClick={() => signIn()} className="mr-5 hover:text-gray-900 cursor-pointer">

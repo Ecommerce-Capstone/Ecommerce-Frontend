@@ -9,7 +9,7 @@ const Unauthenticated = () => {
                 <div className="container mx-auto">
                     <div className="text-center mt-28">
                         <p className="text-lg my-8">Your session has been ended! Please re-authenticate your credentials</p>
-                        <Button onClick={() => signIn()} >Login</Button>
+                        <Button type="button" onClickHandler={() => signIn()} >Login</Button>
                     </div>
                 </div>
             </Layout>
