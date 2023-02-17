@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/Button";
-import BasicInput from "@/components/Input/BasicInput";
+import BasicInput from "@/components/HighlightCategory/Input/BasicInput";
 import Link from "next/link";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';

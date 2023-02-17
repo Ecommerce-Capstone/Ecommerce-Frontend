@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import BasicInput from "@/components/Input/BasicInput";
+import BasicInput from "@/components/HighlightCategory/Input/BasicInput";
 import Button from "@/components/Button";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
-import BasicTextArea from "@/components/Input/BasicTextArea";
+import BasicTextArea from "@/components/HighlightCategory/Input/BasicTextArea";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {api} from '@/utils'
