@@ -34,8 +34,12 @@ const ProductPage = ({productId} : ProductPageProps) => {
             .required("Name is required"),
         price: yup.number()
             .required("Price is required"),
+        stock: yup.number()
+            .required("Price is required"),
         description: yup.string()
             .required("Description is required"),
+        images: yup.string()
+            .required("images is required"),
     });
 
     const {
@@ -55,7 +59,9 @@ const ProductPage = ({productId} : ProductPageProps) => {
             const currentProduct = response.data.data
             setValue("name", currentProduct.name);
             setValue("price", currentProduct.price);
+            setValue("stock", currentProduct.stock);
             setValue("description", currentProduct.description);
+            setValue("images", currentProduct.images);
             console.log("product >> ", product)
         } catch (e){
 
@@ -101,7 +107,9 @@ const ProductPage = ({productId} : ProductPageProps) => {
                     <form onSubmit={handleSubmit(onFormSubmit)}>
                         <BasicInput label="Product Name" type="text" error={errors["product_name"]} {...register("product_name")}  />
                         <BasicInput label="Order Number" type="text" error={errors["price"]} {...register("price")} />
+                        <BasicInput label="Stock" type="text" error={errors["stock"]} {...register("stock")} />
                         <BasicInput label="description" type="text" error={errors["description"]} {...register("description")} />
+                        <BasicInput label="Images Url" type="text" error={errors["images"]} {...register("images")} />
                         <Button type="submit" isLoading={isLoading} >Update Product</Button>
                     </form>
                 </div>
