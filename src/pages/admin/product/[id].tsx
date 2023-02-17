@@ -39,7 +39,7 @@ const ProductPage = ({productId} : ProductPageProps) => {
         description: yup.string()
             .required("Description is required"),
         images: yup.string()
-            .required("Description is required"),
+            .required("images is required"),
     });
 
     const {
