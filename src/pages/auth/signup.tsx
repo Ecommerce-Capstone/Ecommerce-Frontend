@@ -18,6 +18,8 @@ const SigninPage = () => {
     const [error, setError] = useState("")
     const router = useRouter();
     const registrationFormSchema = yup.object().shape({
+        fullName: yup.string()
+            .required("Full name is required"),
         username: yup.string()
             .required("Username is required"),
         email: yup.string()
@@ -76,6 +78,8 @@ const SigninPage = () => {
                             error && <Alert>{error}</Alert>
                         }
                         <form onSubmit={handleSubmit(onFormSubmit)}>
+                            <BasicInput label="Full Name" type="text"
+                                        error={errors["fullName"]} {...register("fullName")} />
                             <BasicInput label="Username" type="text"
                                         error={errors["username"]} {...register("username")} />
                             <BasicInput label="Email" type="email" error={errors["email"]} {...register("email")} />

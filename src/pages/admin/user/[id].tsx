@@ -29,7 +29,7 @@ const UserPage = ({userId} : UserPageProps) => {
     }, [])
 
     const updateProfileFormSchema = yup.object().shape({
-        fullname: yup.string()
+        fullName: yup.string()
             .required("Full Name is required"),
         username: yup.string()
             .required("Username is required"),
@@ -54,7 +54,7 @@ const UserPage = ({userId} : UserPageProps) => {
             setIsLoading(true)
             const response = await api.get(`/users/${userId}`)
             const currentUser = response.data.data
-            setValue("fullname", currentUser.fullname);
+            setValue("fullName", currentUser.fullName);
             setValue("username", currentUser.username);
             setValue("email", currentUser.email);
             setValue("address", currentUser.address);
@@ -102,7 +102,7 @@ const UserPage = ({userId} : UserPageProps) => {
                         </div>
                         <div className="w-9/12">
                             <form onSubmit={handleSubmit(onFormSubmit)}>
-                                <BasicInput label="Name" type="text" error={errors["fullname"]} {...register("fullname")}  />
+                                <BasicInput label="Name" type="text" error={errors["fullName"]} {...register("fullName")}  />
                                 <BasicInput label="Username" type="text" error={errors["username"]} {...register("username")} />
                                 <BasicInput label="Email" type="text" error={errors["email"]} {...register("email")} />
                                 <BasicTextArea label="Address" error={errors["address"]} {...register("address")}  />

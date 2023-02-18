@@ -26,7 +26,7 @@ const UserTable = ({users, confirmDeleteUserHandler}:UserTableProps) => {
                 {
                     users.map((user, index) => (
                         <tr key={user.id} className={cn(index % 2 === 0 && 'bg-gray-100')}>
-                            <td className="border px-4 py-2">{user.fullname}</td>
+                            <td className="border px-4 py-2">{user.fullName}</td>
                             <td className="border px-4 py-2">{user.username}</td>
                             <td className="border px-4 py-2">{user.email}</td>
                             <td className="border px-4 py-2">{user.address}</td>

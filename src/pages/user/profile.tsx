@@ -28,7 +28,7 @@ const ProfilePage = () => {
     }, [status])
 
     const updateProfileFormSchema = yup.object().shape({
-        fullname: yup.string()
+        fullName: yup.string()
             .required("Full Name is required"),
         username: yup.string()
             .required("Username is required"),
@@ -53,7 +53,7 @@ const ProfilePage = () => {
             setIsLoading(true)
             const response = await api.get(`/users/${session?.user.id}`)
             const currentUser = response.data.data
-            setValue("fullname", currentUser.fullname);
+            setValue("fullName", currentUser.fullName);
             setValue("username", currentUser.username);
             setValue("email", currentUser.email);
             setValue("address", currentUser.address);
@@ -108,7 +108,7 @@ const ProfilePage = () => {
                         </div>
                         <div className="w-9/12">
                             <form onSubmit={handleSubmit(onFormSubmit)}>
-                                <BasicInput label="Name" type="text" error={errors["fullname"]} {...register("fullname")}  />
+                                <BasicInput label="Name" type="text" error={errors["fullName"]} {...register("fullName")}  />
                                 <BasicInput label="Username" type="text" error={errors["username"]} {...register("username")} />
                                 <BasicInput label="Email" type="text" error={errors["email"]} {...register("email")} />
                                 <BasicTextArea label="Address" error={errors["address"]} {...register("address")}  />
