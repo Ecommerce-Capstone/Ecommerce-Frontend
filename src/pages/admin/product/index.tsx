@@ -11,6 +11,8 @@ import ProductTable from "@/pages/admin/product/components/ProductTable";
 import Spinner from "@/components/Spinner";
 import ConfirmDeleteProduct from "@/pages/admin/product/components/ConfirmDeleteProduct";
 import Alert from "@/components/Alert";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>([])
@@ -85,6 +87,11 @@ const ProductsPage = () => {
                         <div className="px-5 py-12">
                             <div className="flex flex-col">
                                 <h2 className="text-2xl font-medium pb-2 border-b border-gray-300">Products</h2>
+                                <div className="flex justify-end my-2">
+                                    <Link href="/admin/product/create" >
+                                        <Button>Create Product</Button>
+                                    </Link>
+                                </div>
                                 {
                                     error && <Alert variant="danger">{error}</Alert>
                                 }
