@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
             // @ts-ignore
             async authorize(credentials, req) {
                 const baseURL = process.env.NEXTAUTH_API_URL
-                const response = await axios.post(`${baseURL}/login`, {
+                const response = await axios.post(`${baseURL}/users/login`, {
                     username: credentials?.username,
                     password:  credentials?.password
                 }).catch(err => {

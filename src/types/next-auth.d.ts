@@ -8,7 +8,7 @@ declare module "next-auth" {
             id: number
             username: string
             email: string
-            fullname: string
+            fullName: string
             role:  string
             address: string
         }
