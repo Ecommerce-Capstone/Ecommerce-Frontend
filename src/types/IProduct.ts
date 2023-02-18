@@ -4,7 +4,8 @@ interface IProduct {
     description: string;
     images: string;
     price: number;  
-    stock: number;  
+    stock: number;
+    categoryId: number;
 }
 
 export default IProduct;

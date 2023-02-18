@@ -1,12 +1,12 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import BasicInput from "@/components/HighlightCategory/Input/BasicInput";
+import BasicInput from "@/components/Input/BasicInput";
 import Button from "@/components/Button";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
-import BasicTextArea from "@/components/HighlightCategory/Input/BasicTextArea";
-import {useEffect, useRef, useState} from "react";
+import BasicTextArea from "@/components/Input/BasicTextArea";
+import React, {useEffect, useRef, useState} from "react";
 import {useSession} from "next-auth/react";
 import {api} from '@/utils'
 import {toast} from 'react-toastify';
@@ -17,6 +17,8 @@ import Image from "next/image";
 import {IUser} from "@/types/IUser";
 import IProduct from "@/types/IProduct";
 import {useRouter} from "next/router";
+import {IProductCategory} from "@/types/IProductCategory";
+import BasicSelect from "@/components/Input/BasicSelect";
 
 
 export interface ProductPageProps {
@@ -26,13 +28,15 @@ export interface ProductPageProps {
 const ProductPage = ({productId} : ProductPageProps) => {
     const router = useRouter();
     const [error, setError] = useState("")
-    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0})
+    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0, categoryId: 0})
+    const [productCategories, setProductCategories] = useState<IProductCategory[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isImageLoading, setIsImageLoading] = useState(true)
     const inputFileRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         getAndSetCurrentProduct()
+        getProductCategories()
     }, [])
 
     const updateProductFormSchema = yup.object().shape({
@@ -75,6 +79,15 @@ const ProductPage = ({productId} : ProductPageProps) => {
             setError(e.message)
         } finally {
             setIsLoading(false)
+        }
+    }
+
+    const getProductCategories = async () => {
+        try {
+            const response = await api.get(`/products/categories`)
+            setProductCategories(response.data.data)
+        } catch (e: any){
+            setError(e.message)
         }
     }
 
@@ -148,6 +161,7 @@ const ProductPage = ({productId} : ProductPageProps) => {
                                 <BasicInput label="Product Name" type="text" error={errors["name"]} {...register("name")}  />
                                 <BasicInput label="Price" type="number" error={errors["price"]} {...register("price")} />
                                 <BasicInput label="Stock" type="number" error={errors["stock"]} {...register("stock")} />
+                                <BasicSelect label="Category" options={productCategories} defaultValue={product.categoryId} error={errors["categoryId"]} {...register("categoryId")} />
                                 <BasicTextArea label="description" type="text" error={errors["description"]} {...register("description")} />
                                 <input type="hidden" {...register("images")} />
                                 <Button type="submit" isLoading={isLoading} >Update Product</Button>
