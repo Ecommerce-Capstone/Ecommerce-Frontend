@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/Button";
-import BasicInput from "@/components/HighlightCategory/Input/BasicInput";
+import BasicInput from "@/components/Input/BasicInput";
 import Link from "next/link";
 import {getCsrfToken} from "next-auth/react"
 import {GetServerSidePropsContext} from "next";

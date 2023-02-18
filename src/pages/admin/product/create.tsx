@@ -1,12 +1,12 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import BasicInput from "@/components/HighlightCategory/Input/BasicInput";
+import BasicInput from "@/components/Input/BasicInput";
 import Button from "@/components/Button";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
-import BasicTextArea from "@/components/HighlightCategory/Input/BasicTextArea";
-import {useEffect, useRef, useState} from "react";
+import BasicTextArea from "@/components/Input/BasicTextArea";
+import React, {useEffect, useRef, useState} from "react";
 import {useSession} from "next-auth/react";
 import {api} from '@/utils'
 import {toast} from 'react-toastify';
@@ -17,15 +17,32 @@ import Image from "next/image";
 import {IUser} from "@/types/IUser";
 import IProduct from "@/types/IProduct";
 import {useRouter} from "next/router";
+import {IProductCategory} from "@/types/IProductCategory";
+import Alert from "@/components/Alert";
+import BasicSelect from "@/components/Input/BasicSelect";
 
 
 const ProductPage = () => {
     const router = useRouter();
     const [error, setError] = useState("")
-    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0})
+    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0, categoryId: 0})
+    const [productCategories, setProductCategories] = useState<IProductCategory[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [isImageLoading, setIsImageLoading] = useState(false)
     const inputFileRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        getProductCategories()
+    }, [])
+
+    const getProductCategories = async () => {
+        try {
+            const response = await api.get(`/products/categories`)
+            setProductCategories(response.data.data)
+        } catch (e: any){
+            setError(e.message)
+        }
+    }
 
     const updateProductFormSchema = yup.object().shape({
         name: yup.string()
@@ -38,6 +55,8 @@ const ProductPage = () => {
             .required("Description is required"),
         images: yup.string()
             .required("images is required"),
+        categoryId: yup.number()
+            .required("Product category is required"),
     });
 
     const {
@@ -54,6 +73,7 @@ const ProductPage = () => {
         setIsLoading(true);
         try {
             const data = await api.post(`/products`, formData);
+            console.log("data >> ", data)
             toast(`Product successfully created!`, {
                 type: "success"
             });
@@ -61,6 +81,7 @@ const ProductPage = () => {
                 router.push("/admin/product")
             }, 3000)
         } catch (e: any) {
+            console.log("error >> ", e)
             setError(e.message)
         } finally {
             setIsLoading(false)
@@ -112,16 +133,20 @@ const ProductPage = () => {
                                             isImageLoading ? <i className="bx bx-loader bx-spin text-2xl"/> : <i className="bx bx-image-add text-2xl"/>
                                         }
                                     </button>
+                                    { errors.images && <p className="mt-2 text-sm text-red-600 dark:text-red-500">{`${errors.images.message}`}</p>}
                                 </div>
                             </div>
                         </div>
                         <div className="w-9/12">
+                            {
+                                error && <Alert variant="danger">{error}</Alert>
+                            }
                             <form onSubmit={handleSubmit(onFormSubmit)}>
                                 <BasicInput label="Product Name" type="text" error={errors["name"]} {...register("name")}  />
                                 <BasicInput label="Price" type="number" error={errors["price"]} {...register("price")} />
                                 <BasicInput label="Stock" type="number" error={errors["stock"]} {...register("stock")} />
-                                <BasicInput label="Category Id" type="number" error={errors["categoryId"]} {...register("categoryId")} />
-                                <BasicTextArea label="description" type="text" error={errors["description"]} {...register("description")} />
+                                <BasicSelect label="Category" options={productCategories} defaultValue={product.categoryId} error={errors["categoryId"]} {...register("categoryId")} />
+                                <BasicTextArea label="Description" type="text" error={errors["description"]} {...register("description")} />
                                 <input type="hidden" {...register("images")} />
                                 <Button type="submit" isLoading={isLoading} >Update Product</Button>
                             </form>

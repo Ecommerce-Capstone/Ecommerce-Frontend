@@ -28,6 +28,7 @@ const ApiClient = () => {
                 signOut()
             }
             console.log(`error`, error);
+            throw new Error(error);
         },
     );
 

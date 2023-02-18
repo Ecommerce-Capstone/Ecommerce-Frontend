@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import BasicInput from "@/components/HighlightCategory/Input/BasicInput";
+import BasicInput from "@/components/Input/BasicInput";
 import Button from "@/components/Button";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";

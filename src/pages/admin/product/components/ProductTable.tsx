@@ -42,7 +42,7 @@ const ProductTable = ({products, confirmDeleteProductHandler}:ProductTableProps)
                                         className="bx bx-pencil"/></Button>
                                 </Link>
                                 <Button className="p-2 rounded bg-red-600 border-transparent hover:bg-red-900"
-                                        onClick={() => confirmDeleteProductHandler(product.id)}><i
+                                        onClickHandler={() => confirmDeleteProductHandler(product.id)}><i
                                     className="bx bx-trash"/></Button>
                             </td>
                         </tr>
