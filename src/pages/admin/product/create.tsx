@@ -81,7 +81,6 @@ const ProductPage = () => {
                 router.push("/admin/product")
             }, 3000)
         } catch (e: any) {
-            console.log("error >> ", e)
             setError(e.message)
         } finally {
             setIsLoading(false)
