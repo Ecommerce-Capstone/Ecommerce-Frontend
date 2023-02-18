@@ -3,6 +3,7 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import React from "react";
 import IProduct from "@/types/IProduct";
+import Image from "next/image";
 
 interface ProductTableProps {
     products: IProduct[],
@@ -15,10 +16,10 @@ const ProductTable = ({products, confirmDeleteProductHandler}:ProductTableProps)
             <table className="w-full table-auto">
                 <thead>
                 <tr>
+                    <th className="px-4 py-2">Image</th>
                     <th className="px-4 py-2">Name</th>
                     <th className="px-4 py-2">Price</th>
                     <th className="px-4 py-2">Stock</th>
-                    <th className="px-4 py-2">URL</th>
                     <th className="px-4 py-2">Description</th>
                     <th className="px-4 py-2">Actions</th>
                 </tr>
@@ -27,10 +28,12 @@ const ProductTable = ({products, confirmDeleteProductHandler}:ProductTableProps)
                 {
                     products.map((product, index) => (
                         <tr key={product.id} className={cn(index % 2 === 0 && 'bg-gray-100')}>
+                            <td className="border px-4 py-2">
+                                <Image src={product.images} alt={product.name} height={100} width={100} />
+                            </td>
                             <td className="border px-4 py-2">{product.name}</td>
                             <td className="border px-4 py-2">{product.price}</td>
                             <td className="border px-4 py-2">{product.stock}</td>
-                            <td className="border px-4 py-2">{product.images}</td>
                             <td className="border px-4 py-2">{product.description}</td>
                             <td className="border px-4 py-2">
                                 <Link href={`/admin/product/${product.id}`} className="mr-4">

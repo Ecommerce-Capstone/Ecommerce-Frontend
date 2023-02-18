@@ -19,21 +19,13 @@ import IProduct from "@/types/IProduct";
 import {useRouter} from "next/router";
 
 
-export interface ProductPageProps {
-    productId: number
-}
-
-const ProductPage = ({productId} : ProductPageProps) => {
+const ProductPage = () => {
     const router = useRouter();
     const [error, setError] = useState("")
     const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0})
-    const [isLoading, setIsLoading] = useState(true)
-    const [isImageLoading, setIsImageLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isImageLoading, setIsImageLoading] = useState(false)
     const inputFileRef = useRef<HTMLInputElement>(null)
-
-    useEffect(() => {
-        getAndSetCurrentProduct()
-    }, [])
 
     const updateProductFormSchema = yup.object().shape({
         name: yup.string()
@@ -58,31 +50,11 @@ const ProductPage = ({productId} : ProductPageProps) => {
         resolver: yupResolver(updateProductFormSchema)
     });
 
-    const getAndSetCurrentProduct = async () => {
-        try {
-            setIsLoading(true)
-            const response = await api.get(`/products/${productId}`)
-            const currentProduct = response.data.data
-            setValue("name", currentProduct.name);
-            setValue("price", currentProduct.price);
-            setValue("stock", currentProduct.stock);
-            setValue("description", currentProduct.description);
-            setValue("images", currentProduct.images);
-            setIsImageLoading(false)
-            setProduct(currentProduct)
-            console.log("product >> ", product)
-        } catch (e: any){
-            setError(e.message)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     async function onFormSubmit(formData: any) {
         setIsLoading(true);
         try {
-            const data = await api.patch(`/products/${productId}`, formData);
-            toast(`Product successfully updated!`, {
+            const data = await api.post(`/products`, formData);
+            toast(`Product successfully created!`, {
                 type: "success"
             });
             setTimeout(() => {
@@ -148,6 +120,7 @@ const ProductPage = ({productId} : ProductPageProps) => {
                                 <BasicInput label="Product Name" type="text" error={errors["name"]} {...register("name")}  />
                                 <BasicInput label="Price" type="number" error={errors["price"]} {...register("price")} />
                                 <BasicInput label="Stock" type="number" error={errors["stock"]} {...register("stock")} />
+                                <BasicInput label="Category Id" type="number" error={errors["categoryId"]} {...register("categoryId")} />
                                 <BasicTextArea label="description" type="text" error={errors["description"]} {...register("description")} />
                                 <input type="hidden" {...register("images")} />
                                 <Button type="submit" isLoading={isLoading} >Update Product</Button>
@@ -158,15 +131,6 @@ const ProductPage = ({productId} : ProductPageProps) => {
             </Layout>
         </>
     )
-}
-
-export async function getServerSideProps(context: { params: { id: number; }; }) {
-    const  { id } = context.params;
-    return {
-        props: {
-            productId: id
-        }
-    }
 }
 
 export default ProductPage
