@@ -64,11 +64,20 @@ const ProductDetailPage = () => {
                             products</h2></div>
                     </div>
 
-                    <Catalog />
+                    <Catalog page={0} size={6} />
                 </div>
             </Layout>
         </>
     )
+}
+
+export async function getServerSideProps(context: { params: { id: number; }; }) {
+    const  { id } = context.params;
+    return {
+        props: {
+            productId: id
+        }
+    }
 }
 
 export default ProductDetailPage;

@@ -13,7 +13,7 @@ const Pagination = ({page, onChangePageHandler, ...props} : PageProps) => {
     const firstPage = page.page <= 0
     const lastPage = page.last
     const pages = []
-    for (let i = 0; i < page.total_pages; i++){
+    for (let i = 0; i < page.totalPages; i++){
         pages.push(i)
     }
     return (
@@ -28,7 +28,7 @@ const Pagination = ({page, onChangePageHandler, ...props} : PageProps) => {
                     {
                         pages.map((p, i) => (
                             <li key={p}>
-                                <button type="button" onClick={() => onChangePageHandler(p)} className={cn("px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700", p === page.page && "bg-slate-300 cursor-not-allowed")} disabled={p === page.page} >{p + 1}</button>
+                                <button type="button" onClick={() => onChangePageHandler(p)} className={cn("px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700", p === page.page && "bg-orange-300 cursor-not-allowed")} disabled={p === page.page} >{p + 1}</button>
                             </li>
                         ))
                     }
