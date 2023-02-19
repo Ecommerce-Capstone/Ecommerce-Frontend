@@ -9,7 +9,6 @@ export const searchSlice = createSlice({
     initialState,
     reducers: {
         setKeyword: (state, action) => {
-            console.log("payload >> ", action)
             state.keyword = action.payload
         }
     }

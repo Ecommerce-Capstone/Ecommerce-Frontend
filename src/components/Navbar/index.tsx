@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setKeyword} from "@/store/search";
 import {useState} from "react";
 import {useRouter} from "next/router";
+import Cart from "@/components/Navbar/Cart";
 
 const Navbar = () => {
     const router = useRouter()
@@ -51,11 +52,7 @@ const Navbar = () => {
                         </button>
                     }
 
-                    <a className="mr-5 hover:text-gray-900 cursor-pointer">
-                        <i className="bx bxs-cart text-xl mr-2" />
-                        <span className="inline-block rounded-full w-6 h-6 text-sm bg-orange-600 text-white px-2 py-0.5 mr-2">1</span>
-                        <span className="hidden md:inline-block"> Cart</span>
-                    </a>
+                    <Cart />
                 </nav>
             </div>
         </header>
