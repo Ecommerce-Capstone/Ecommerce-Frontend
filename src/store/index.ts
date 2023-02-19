@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit"
 import searchReducer from "./search";
+import cartReducer from "./cart"
 
 export const store = configureStore({
     reducer: {
-        search: searchReducer
+        search: searchReducer,
+        cart: cartReducer
     },
 })
 

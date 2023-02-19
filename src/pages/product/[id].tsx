@@ -13,6 +13,8 @@ import {useSession} from "next-auth/react";
 import Loading from "@/views/Loading";
 import Alert from "@/components/Alert";
 import Link from "next/link";
+import {useDispatch} from "react-redux";
+import {addCart, updateCart} from "@/store/cart";
 
 interface ProductDetailPageProps {
     productId: number
@@ -32,6 +34,7 @@ const ProductDetailPage = ({ productId }: ProductDetailPageProps) => {
         stock: 0
     })
     const [isCartLoading, setIsCartLoading] = useState(false)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         getProduct()
@@ -59,6 +62,7 @@ const ProductDetailPage = ({ productId }: ProductDetailPageProps) => {
                 productId: product.id,
                 quantity: count
             })
+            dispatch(updateCart(true))
             toast(`Product added to cart`, {
                 type: "success"
             });
