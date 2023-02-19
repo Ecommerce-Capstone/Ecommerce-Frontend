@@ -12,7 +12,7 @@ export default function Home() {
             <Layout>
                 <Hero />
                 <HighlightCategory/>
-                <Catalog/>
+                <Catalog size={12}/>
 
             </Layout>
         </>

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 import {getSession, signOut} from 'next-auth/react';
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL || 'http://localhost:8080/';
@@ -28,7 +28,7 @@ const ApiClient = () => {
                 signOut()
             }
             console.log(`error`, error);
-            throw new Error(error);
+            throw new AxiosError(error);
         },
     );
 

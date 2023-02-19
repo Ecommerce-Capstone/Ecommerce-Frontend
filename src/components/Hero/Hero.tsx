@@ -1,6 +1,23 @@
 import 'boxicons/css/boxicons.min.css'
+import {useRouter} from "next/router";
+import {useSession} from "next-auth/react";
+import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
+import {setKeyword} from "@/store/search";
 
 const Hero = () => {
+    const router = useRouter()
+    const keyword = useSelector((state: any) => state.search.keyword)
+    const [search, setSearch] = useState(keyword)
+    const dispatch = useDispatch()
+
+    const searchKeywordChangeHandler = (event: any) => {
+        event.preventDefault()
+        dispatch(setKeyword(search))
+        if (!router.pathname.includes("/product")){
+            return router.push("/product")
+        }
+    }
     return (
         <>
             <div
@@ -20,15 +37,15 @@ const Hero = () => {
                         </p>
                         <div className="hidden lg:block max-w-[700px] mx-auto md:pt-1 lg:pt-3">
                             <div className="lg:flex">
-                                <div className="w-full">
+                                <form onSubmit={searchKeywordChangeHandler} className="w-full">
                                     <div className="relative">
                                         <input type="text" className="rounded bg-gray-100 p-4 text-base pl-12 w-full"
-                                                placeholder="Search" />
+                                                placeholder="Search" value={search} onChange={(event) => setSearch(event.target.value)} />
                                             <div className="absolute top-5 left-4 text-gray-400 pr-4">
                                                 <i className="bx bx-search text-xl" />
                                             </div>
                                     </div>
-                                </div>
+                                </form>
 
                             </div>
                         </div>
