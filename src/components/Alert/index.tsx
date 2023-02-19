@@ -22,7 +22,7 @@ const Alert = (props: any) => {
     }
     return (
         <>
-            <div className={cn("p-4 mb-4 text-sm rounded-lg", variantClass)} role="alert">
+            <div className={cn("p-4 mb-4 text-sm rounded-lg", variantClass, props.className)} role="alert">
                 {props.children}
             </div>
         </>
