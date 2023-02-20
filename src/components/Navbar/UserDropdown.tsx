@@ -19,6 +19,10 @@ const UserDropdown = (props: any) => {
                 <div className={cn("absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none", isHidden && "hidden")} role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
                     <div className="py-1" role="none">
                         <Link href={"/user/profile"} className="text-gray-700 block px-4 py-2 text-sm">Profile</Link>
+                        <Link href={"/order"} className="text-gray-700 block px-4 py-2 text-sm">Order</Link>
+                        {
+                            props.role === "admin" && <Link href={"/admin/users"} className="text-gray-700 block px-4 py-2 text-sm">Admin</Link>
+                        }
                         <button type="button" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" onClick={() => signOut()}>Sign out</button>
                     </div>
                 </div>
