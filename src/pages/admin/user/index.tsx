@@ -7,20 +7,20 @@ import {IUser} from "@/types/IUser";
 import {IPage} from "@/types/IPage";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import UserTable from "@/pages/admin/user/components/UserTable";
+import UserTable from "@/components/Table/UserTable";
 import Spinner from "@/components/Spinner";
-import ConfirmDeleteUser from "@/pages/admin/user/components/ConfirmDeleteUser";
+import ConfirmDeleteUser from "@/components/Modal/ConfirmDeleteUser";
 import Alert from "@/components/Alert";
 
 const UsersPage = () => {
     const [users, setUsers] = useState<IUser[]>([])
     const [page, setPage] = useState<IPage>({
         last: false,
-        number_element: 0,
+        numberElement: 0,
         page: 0,
         size: 0,
-        total_elements: 0,
-        total_pages: 0
+        totalElements: 0,
+        totalPages: 0
     })
     const [currentPage, setCurrentPage] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
