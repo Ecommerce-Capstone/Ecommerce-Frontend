@@ -1,4 +1,4 @@
-import {cn} from "@/utils";
+import {cn, idr} from "@/utils";
 import Link from "next/link";
 import Button from "@/components/Button";
 import React from "react";
@@ -32,7 +32,7 @@ const ProductTable = ({products, confirmDeleteProductHandler}:ProductTableProps)
                                 <Image src={product.images} alt={product.name} height={100} width={100} />
                             </td>
                             <td className="border px-4 py-2">{product.name}</td>
-                            <td className="border px-4 py-2">{product.price}</td>
+                            <td className="border px-4 py-2">{idr(product.price)}</td>
                             <td className="border px-4 py-2">{product.stock}</td>
                             <td className="border px-4 py-2">{product.description}</td>
                             <td className="border px-4 py-2">

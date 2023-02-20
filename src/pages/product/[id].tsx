@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import Button from "@/components/Button";
 import Catalog from "@/components/Catalog";
 import React, {useEffect, useState} from "react";
-import {api} from "@/utils";
+import {api, idr} from "@/utils";
 import IProduct from "@/types/IProduct";
 import Image from "next/image";
 import 'react-toastify/dist/ReactToastify.css';
@@ -101,7 +101,7 @@ const ProductDetailPage = ({ productId }: ProductDetailPageProps) => {
                                         </div>
                                         <div className="flex items-center mt-5">
                                             <div className="text-brand-dark font-bold text-base md:text-xl xl:text-[22px]">
-                                                {product.price}
+                                                {idr(product.price)}
                                             </div>
                                         </div>
                                     </div>

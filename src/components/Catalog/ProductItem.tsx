@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import IProduct from "@/types/IProduct";
+import {idr} from "@/utils";
 
 interface ProductItemProps {
     product: IProduct
@@ -17,7 +18,7 @@ const ProductItem = ({product}: ProductItemProps) => {
                     </div>
                     <div className="flex flex-col px-3 md:px-4 lg:px-[18px] pb-5 lg:pb-6 lg:pt-1.5 h-full z-50 bg-white">
                         <div className="mb-1 lg:mb-1.5 -mx-1">
-                            <span className="inline-block mx-1 text-sm font-semibold sm:text-15px lg:text-base text-brand-dark">{product.price}</span>
+                            <span className="inline-block mx-1 text-sm font-semibold sm:text-15px lg:text-base text-brand-dark">{idr(product.price)}</span>
                         </div>
                         <h2 className="text-brand-dark text-13px sm:text-sm lg:text-15px leading-5 sm:leading-6 mb-1.5">{product.name}</h2>
                     </div>
