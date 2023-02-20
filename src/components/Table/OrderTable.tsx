@@ -1,4 +1,4 @@
-import {cn} from "@/utils";
+import {cn, idr} from "@/utils";
 import React from "react";
 import {IOrder} from "@/types/IOrder";
 
@@ -22,7 +22,7 @@ const UserTable = ({orders}:UserTableProps) => {
                     orders.map((order, index) => (
                         <tr key={order.id} className={cn(index % 2 === 0 && 'bg-gray-100')}>
                             <td className="border px-4 py-2">{order.user.fullName}</td>
-                            <td className="border px-4 py-2">{order.total}</td>
+                            <td className="border px-4 py-2">{idr(order.total)}</td>
                             <td className="border px-4 py-2">{order.status}</td>
                         </tr>
                     ))

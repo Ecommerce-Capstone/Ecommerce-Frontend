@@ -3,7 +3,7 @@ import Head from "next/head";
 import React, {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import Loading from "@/views/Loading";
-import {api} from "@/utils";
+import {api, idr} from "@/utils";
 import Image from "next/image";
 import Button from "@/components/Button";
 import {ICart} from "@/types/ICart";
@@ -122,7 +122,7 @@ const CartPage = () => {
                                             <Image src={cart.product.images} alt="a" width={50} height={50} className="w-20 h-20"/>
                                             <div className="flex-1 ml-4">
                                                 <p className="text-lg font-medium">{cart.product.name}</p>
-                                                <p className="text-gray-500">{cart.product.price}</p>
+                                                <p className="text-gray-500">{idr(cart.product.price)}</p>
                                             </div>
                                             <div className="flex items-center">
                                                 <button className="p-1 border border-gray-300 rounded-full" onClick={() => reduceQuantity(index)} onMouseLeave={() => saveCart(index)}>
@@ -142,7 +142,7 @@ const CartPage = () => {
                                 }
                                 <div className="mt-4 flex items-center justify-between">
                                     <p className="text-lg font-medium">Total:</p>
-                                    <p className="text-lg">{total}</p>
+                                    <p className="text-lg">{idr(total)}</p>
                                 </div>
                                 <div className="text-right mt-4">
                                     <Button isLoading={isLoading} onClickHandler={checkout} >Checkout</Button>
