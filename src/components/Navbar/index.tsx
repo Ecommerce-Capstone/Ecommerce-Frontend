@@ -43,7 +43,7 @@ const Navbar = () => {
                         </button>
                     }
                     {
-                        status == "authenticated" && <UserDropdown name={data?.user.fullName} />
+                        status == "authenticated" && <UserDropdown name={data?.user.fullName} role={data?.user.role} />
                     }
                     {
                         status == "unauthenticated" && <button type="button" onClick={() => signIn()} className="mr-5 hover:text-gray-900 cursor-pointer">
