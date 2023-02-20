@@ -7,9 +7,9 @@ import IProduct from "@/types/IProduct";
 import {IPage} from "@/types/IPage";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import ProductTable from "@/pages/admin/product/components/ProductTable";
+import ProductTable from "@/components/Table/ProductTable";
 import Spinner from "@/components/Spinner";
-import ConfirmDeleteProduct from "@/pages/admin/product/components/ConfirmDeleteProduct";
+import ConfirmDeleteProduct from "@/components/Modal/ConfirmDeleteProduct";
 import Alert from "@/components/Alert";
 import Link from "next/link";
 import Button from "@/components/Button";
@@ -18,11 +18,11 @@ const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>([])
     const [page, setPage] = useState<IPage>({
         last: false,
-        number_element: 0,
+        numberElement: 0,
         page: 0,
         size: 0,
-        total_elements: 0,
-        total_pages: 0
+        totalElements: 0,
+        totalPages: 0
     })
     const [currentPage, setCurrentPage] = useState(0)
     const [isLoading, setIsLoading] = useState(false)

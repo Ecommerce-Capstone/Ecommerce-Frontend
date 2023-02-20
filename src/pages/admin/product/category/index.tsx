@@ -11,18 +11,18 @@ import Alert from "@/components/Alert";
 import Link from "next/link";
 import Button from "@/components/Button";
 import {IProductCategory} from "@/types/IProductCategory";
-import ProductCategoryTable from "@/pages/admin/product/category/components/ProductCategoryTable";
-import ConfirmDeleteProductCategory from "@/pages/admin/product/category/components/ConfirmDeleteProductCategory";
+import ProductCategoryTable from "@/components/Table/ProductCategoryTable";
+import ConfirmDeleteProductCategory from "@/components/Modal/ConfirmDeleteProductCategory";
 
 const ProductCategoriesPage = () => {
     const [productCategories, setProductCategories] = useState<IProductCategory[]>([])
     const [page, setPage] = useState<IPage>({
         last: false,
-        number_element: 0,
+        numberElement: 0,
         page: 0,
         size: 0,
-        total_elements: 0,
-        total_pages: 0
+        totalElements: 0,
+        totalPages: 0
     })
     const [currentPage, setCurrentPage] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
