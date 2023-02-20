@@ -4,19 +4,35 @@ import React, {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import Loading from "@/views/Loading";
 import {api} from "@/utils";
-import {MinusIcon, PlusIcon} from "@heroicons/react/solid";
 import Image from "next/image";
 import Button from "@/components/Button";
+import {ICart} from "@/types/ICart";
+import 'react-toastify/dist/ReactToastify.css';
+import {useRouter} from "next/router";
+import {useDispatch} from "react-redux";
+import {updateCart} from "@/store/cart";
 
 const CartPage = () => {
+    const router = useRouter();
     const {data: session, status} = useSession()
-    const [carts, setCarts] = useState([])
+    const [carts, setCarts] = useState<ICart[]>([])
+    const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
+    const [total, setTotal] = useState(0)
 
     useEffect(() => {
         if (status === "authenticated") {
             getCarts()
         }
     }, [status])
+
+    useEffect(() => {
+        let total = 0
+        carts.map(cart => {
+            total += cart.quantity * cart.product.price
+        })
+        setTotal(total)
+    }, [carts])
 
     const getCarts = async () => {
         try {
@@ -31,23 +47,56 @@ const CartPage = () => {
         }
     }
 
-    const addQuantity = async (cartId: number) => {
+    const addQuantity = async (index: number) => {
+        console.log("product qty1 >> ", carts[index].quantity)
+        if (carts[index].product.stock > carts[index].quantity){
+            carts[index].quantity++
+        }
+        console.log("product qty2 >> ", carts[index].quantity)
+        setCarts([...carts])
+    }
+
+    const reduceQuantity = async (index: number) => {
+        if (carts[index].quantity > 1){
+            carts[index].quantity--
+        }
+        setCarts([...carts])
+    }
+
+    const removeCart = async (cartId: number) => {
         try {
-            const response = await api.patch(`/orders/carts/${cartId}`, {
-                quantity: 1
-            })
-            setCarts(response.data.data)
+            const response = await api.delete(`/orders/carts/${cartId}`)
+            getCarts()
+            dispatch(updateCart(true))
         } catch (e) {
             console.log("error >> ", e)
         }
     }
 
-    const reduceQuantity = async (cartId: number) => {
-
+    const saveCart = async (index: number) => {
+        console.log("index >> ", index)
+        const cartId = carts[index].id
+        try {
+            const response = await api.patch(`/orders/carts/${cartId}`, {
+                quantity: carts[index].quantity
+            })
+            getCarts()
+            dispatch(updateCart(true))
+        } catch (e) {
+            console.log("error >> ", e)
+        }
     }
 
-    const removeCart = async (cartId: number) => {
-
+    const checkout = async () => {
+        try {
+            setIsLoading(true);
+            const response = await api.post(`/orders`);
+            return router.push(`/invoice/${response.data.data.id}`);
+        } catch (e){
+            console.log("error >> ", e)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     if (status === "loading") {
@@ -68,21 +117,24 @@ const CartPage = () => {
                                     Shopping Cart
                                 </h2>
                                 {
-                                    carts.map(cart => (
+                                    carts.map((cart, index) => (
                                         <div key={cart.id} className="flex items-center py-2 border-b border-gray-200">
-                                            <Image src="http://placeimg.com/640/480" alt="a" width={50} height={50}
-                                                   className="w-20 h-20"/>
+                                            <Image src={cart.product.images} alt="a" width={50} height={50} className="w-20 h-20"/>
                                             <div className="flex-1 ml-4">
-                                                <p className="text-lg font-medium">Product Name</p>
-                                                <p className="text-gray-500">120000</p>
+                                                <p className="text-lg font-medium">{cart.product.name}</p>
+                                                <p className="text-gray-500">{cart.product.price}</p>
                                             </div>
                                             <div className="flex items-center">
-                                                <button className="p-1 border border-gray-300 rounded-full">
+                                                <button className="p-1 border border-gray-300 rounded-full" onClick={() => reduceQuantity(index)} onMouseLeave={() => saveCart(index)}>
                                                     <i className="bx bx-minus w-5 h-5 text-gray-400"/>
                                                 </button>
                                                 <p className="mx-2 font-medium">{cart.quantity}</p>
-                                                <button className="p-1 border border-gray-300 rounded-full">
+                                                <button className="p-1 border border-gray-300 rounded-full" onClick={() => addQuantity(index)} onMouseLeave={() => saveCart(index)}>
                                                     <i className="bx bx-plus w-5 h-5 text-gray-400"/>
+                                                </button>
+
+                                                <button className="p-1 border border-gray-300 rounded-full bg-red-500 ml-8" onClick={() => removeCart(cart.id)}>
+                                                    <i className="bx bx-trash w-5 h-5 text-white"/>
                                                 </button>
                                             </div>
                                         </div>
@@ -90,10 +142,10 @@ const CartPage = () => {
                                 }
                                 <div className="mt-4 flex items-center justify-between">
                                     <p className="text-lg font-medium">Total:</p>
-                                    <p className="text-lg">120000</p>
+                                    <p className="text-lg">{total}</p>
                                 </div>
                                 <div className="text-right mt-4">
-                                    <Button >Checkout</Button>
+                                    <Button isLoading={isLoading} onClickHandler={checkout} >Checkout</Button>
                                 </div>
                             </div>
                         </div>
