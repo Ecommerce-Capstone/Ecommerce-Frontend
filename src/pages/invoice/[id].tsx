@@ -2,10 +2,13 @@ import Layout from "@/components/Layout";
 import {useEffect, useState} from "react";
 import {IOrderItem} from "@/types/IOrderItem";
 import {IOrder} from "@/types/IOrder";
-import {api} from "@/utils";
+import {api, idr} from "@/utils";
 import Link from "next/link";
 import Button from "@/components/Button";
 import _ from "lodash"
+import {Stomp} from "@stomp/stompjs";
+// @ts-ignore
+import * as SockJS from 'sockjs-client';
 
 interface InvoicePageProps {
     orderId: number
@@ -19,6 +22,7 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
     useEffect(() => {
         getOrder()
         getOrderItem()
+        connectWs()
     }, [])
 
     const getOrder = async () => {
@@ -38,6 +42,17 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
         } catch (e) {
             console.log("error >> ", e)
         }
+    }
+
+    const connectWs = () => {
+        const socket = new SockJS("http://localhost:8082/ws");
+        const client = Stomp.over(socket)
+        client.connect({}, function (frame: any) {
+            client.subscribe(`/i/order-${orderId}`, function (message) {
+                const m = JSON.parse(message.body);
+                setOrder(m)
+            });
+        });
     }
     return (
         <>
@@ -108,8 +123,8 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
                                                     </div>
                                                 </td>
                                                 <td className="text-center">{item.quantity}</td>
-                                                <td className="text-center">{item.price}</td>
-                                                <td className="text-center">{item.quantity * item.price}</td>
+                                                <td className="text-center">{idr(item.price)}</td>
+                                                <td className="text-center">{idr(item.quantity * item.price)}</td>
                                             </tr>
                                         ))
                                     }
@@ -118,7 +133,7 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
                                     <tr>
                                         <td colSpan={2}/>
                                         <td className="text-center"><b>Total</b></td>
-                                        <td className="text-center font-bold">{total}</td>
+                                        <td className="text-center font-bold">{idr(total)}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
