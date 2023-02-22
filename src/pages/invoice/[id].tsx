@@ -8,9 +8,9 @@ import Button from "@/components/Button";
 import _ from "lodash"
 import {Stomp} from "@stomp/stompjs";
 // @ts-ignore
-import * as SockJS from 'sockjs-client';
 import moment from "moment"
 import Head from "next/head";
+import Script from 'next/script'
 
 interface InvoicePageProps {
     orderId: number
@@ -27,7 +27,7 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
     useEffect(() => {
         getOrder()
         getOrderItem()
-        connectWs()
+        // connectWs()
     }, [])
 
     const getOrder = async () => {
@@ -50,6 +50,7 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
     }
 
     const connectWs = () => {
+        // @ts-ignore
         const socket = new SockJS(websocketUrl);
         const client = Stomp.over(socket)
         client.connect({}, function (frame: any) {
@@ -61,6 +62,7 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
     }
     return (
         <>
+            <Script src="/js/sockjs.js" onLoad={connectWs} />
             <Head>
                 <title>Invoice</title>
                 <meta property="og:title" content="Products" key="title"/>
