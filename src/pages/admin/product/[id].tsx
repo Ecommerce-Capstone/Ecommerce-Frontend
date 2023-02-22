@@ -19,6 +19,7 @@ import IProduct from "@/types/IProduct";
 import {useRouter} from "next/router";
 import {IProductCategory} from "@/types/IProductCategory";
 import BasicSelect from "@/components/Input/BasicSelect";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 
 export interface ProductPageProps {
@@ -28,7 +29,7 @@ export interface ProductPageProps {
 const ProductPage = ({productId} : ProductPageProps) => {
     const router = useRouter();
     const [error, setError] = useState("")
-    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0, categoryId: 0})
+    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "/illustration/images.svg", name: "", price: 0, stock: 0, sold: 0, categoryId: 0})
     const [productCategories, setProductCategories] = useState<IProductCategory[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isImageLoading, setIsImageLoading] = useState(true)
@@ -74,7 +75,6 @@ const ProductPage = ({productId} : ProductPageProps) => {
             setValue("images", currentProduct.images);
             setIsImageLoading(false)
             setProduct(currentProduct)
-            console.log("product >> ", product)
         } catch (e: any){
             setError(e.message)
         } finally {
@@ -135,16 +135,17 @@ const ProductPage = ({productId} : ProductPageProps) => {
     return (
         <>
             <Head>
-                <title>Product Return</title>
+                <title>Edit Product</title>
                 <meta property="og:title" content="Product Return" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 py-24 mx-auto flex justify-center">
                     <div className="w-full flex">
                         <div className="w-3/12">
                             <div className="px-8 relative">
                                 {
-                                    product.images ? <Image className="rounded w-full" src={product.images} alt={product.name} width={400} height={400} /> : <Image className="rounded w-full" src="/select_image.png" alt={product.name} width={400} height={400} />
+                                    <Image className="rounded w-full" src={product.images} alt={product.name} width={400} height={400} />
                                 }
                                 <div className="absolute bottom-1 right-8">
                                     <input type="file" className="hidden" ref={inputFileRef} onChange={() => onFileChange(event)} />
@@ -162,7 +163,7 @@ const ProductPage = ({productId} : ProductPageProps) => {
                                 <BasicInput label="Price" type="number" error={errors["price"]} {...register("price")} />
                                 <BasicInput label="Stock" type="number" error={errors["stock"]} {...register("stock")} />
                                 <BasicSelect label="Category" options={productCategories} defaultValue={product.categoryId} error={errors["categoryId"]} {...register("categoryId")} />
-                                <BasicTextArea label="description" type="text" error={errors["description"]} {...register("description")} />
+                                <BasicTextArea label="Description" type="text" error={errors["description"]} {...register("description")} />
                                 <input type="hidden" {...register("images")} />
                                 <Button type="submit" isLoading={isLoading} >Update Product</Button>
                             </form>

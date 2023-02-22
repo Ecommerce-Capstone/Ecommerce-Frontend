@@ -22,7 +22,7 @@ const ProfilePage = () => {
     const router = useRouter();
     const {data:session, status} = useSession()
     const [error, setError] = useState("")
-    const [user, setUser] = useState<IUser>({address: "", email: "", fullName: "", id: 0, photo: "", username: ""})
+    const [user, setUser] = useState<IUser>({address: "", email: "", fullName: "", id: 0, photo: "/illustration/images.svg", username: ""})
     const [isLoading, setIsLoading] = useState(true)
     const [isImageLoading, setIsImageLoading] = useState(false)
     const inputFileRef = useRef<HTMLInputElement>(null)
@@ -129,7 +129,7 @@ const ProfilePage = () => {
                         <div className="w-3/12">
                             <div className="px-8 relative">
                                 {
-                                    user.photo ? <Image className="rounded w-full" src={user.photo} alt={user.fullName} width={400} height={400} /> : <Image className="rounded w-full" src="/select_image.png" alt={user.fullName} width={400} height={400} />
+                                    <Image className="rounded w-full" src={user.photo} alt={user.fullName} width={400} height={400} />
                                 }
                                 <div className="absolute bottom-1 right-8">
                                     <input type="file" className="hidden" ref={inputFileRef} onChange={() => onFileChange(event)} />

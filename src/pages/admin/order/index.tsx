@@ -12,6 +12,7 @@ import ProductTable from "@/components/Table/ProductTable";
 import Pagination from "@/components/Pagination";
 import ConfirmDeleteProduct from "@/components/Modal/ConfirmDeleteProduct";
 import OrderTable from "@/components/Table/OrderTable";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 const OrderPage = () => {
     const [orders, setOrders] = useState<IOrder[]>([])
@@ -60,6 +61,7 @@ const OrderPage = () => {
                 <meta property="og:title" content="Products" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 mx-auto flex justify-center">
                     <section className="w-full text-gray-600 body-font overflow-hidden">
                         <div className="px-5 py-12">

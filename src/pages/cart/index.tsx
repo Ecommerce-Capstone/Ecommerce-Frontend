@@ -43,16 +43,13 @@ const CartPage = () => {
             })
             setCarts(response.data.data)
         } catch (e) {
-            console.log("error >> ", e)
         }
     }
 
     const addQuantity = async (index: number) => {
-        console.log("product qty1 >> ", carts[index].quantity)
         if (carts[index].product.stock > carts[index].quantity){
             carts[index].quantity++
         }
-        console.log("product qty2 >> ", carts[index].quantity)
         setCarts([...carts])
     }
 
@@ -69,12 +66,11 @@ const CartPage = () => {
             getCarts()
             dispatch(updateCart(true))
         } catch (e) {
-            console.log("error >> ", e)
+
         }
     }
 
     const saveCart = async (index: number) => {
-        console.log("index >> ", index)
         const cartId = carts[index].id
         try {
             const response = await api.patch(`/orders/carts/${cartId}`, {
@@ -83,7 +79,7 @@ const CartPage = () => {
             getCarts()
             dispatch(updateCart(true))
         } catch (e) {
-            console.log("error >> ", e)
+
         }
     }
 
@@ -93,7 +89,7 @@ const CartPage = () => {
             const response = await api.post(`/orders`);
             return router.push(`/invoice/${response.data.data.id}`);
         } catch (e){
-            console.log("error >> ", e)
+
         } finally {
             setIsLoading(false)
         }
@@ -145,7 +141,9 @@ const CartPage = () => {
                                     <p className="text-lg">{idr(total)}</p>
                                 </div>
                                 <div className="text-right mt-4">
-                                    <Button isLoading={isLoading} onClickHandler={checkout} >Checkout</Button>
+                                    {
+                                        carts.length > 0 && <Button isLoading={isLoading} onClickHandler={checkout} >Checkout</Button>
+                                    }
                                 </div>
                             </div>
                         </div>

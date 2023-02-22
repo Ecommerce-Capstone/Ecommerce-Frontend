@@ -14,6 +14,7 @@ import {IUser} from "@/types/IUser";
 import Image from "next/image";
 import {useRouter} from "next/router";
 import Alert from "@/components/Alert";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 export interface UserPageProps {
     userId: number
@@ -22,7 +23,7 @@ export interface UserPageProps {
 const UserPage = ({userId} : UserPageProps) => {
     const router = useRouter();
     const [error, setError] = useState("")
-    const [user, setUser] = useState<IUser>({address: "", email: "", fullName: "", id: 0, photo: "", username: ""})
+    const [user, setUser] = useState<IUser>({address: "", email: "", fullName: "", id: 0, photo: "/illustration/images.svg", username: ""})
     const [isLoading, setIsLoading] = useState(true)
     const [isImageLoading, setIsImageLoading] = useState(false)
     const inputFileRef = useRef<HTMLInputElement>(null)
@@ -118,12 +119,13 @@ const UserPage = ({userId} : UserPageProps) => {
                 <meta property="og:title" content="Profile" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 py-24 mx-auto flex justify-center">
                     <div className="w-full flex">
                         <div className="w-3/12">
                             <div className="px-8 relative">
                                 {
-                                    user.photo ? <Image className="rounded w-full" src={user.photo} alt={user.fullName} width={400} height={400} /> : <Image className="rounded w-full" src="/select_image.png" alt={user.fullName} width={400} height={400} />
+                                    <Image className="rounded w-full" src={user.photo} alt={user.fullName} width={400} height={400} />
                                 }
                                 <div className="absolute bottom-1 right-8">
                                     <input type="file" className="hidden" ref={inputFileRef} onChange={() => onFileChange(event)} />

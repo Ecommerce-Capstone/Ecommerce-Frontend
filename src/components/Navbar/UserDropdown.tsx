@@ -21,7 +21,7 @@ const UserDropdown = (props: any) => {
                         <Link href={"/user/profile"} className="text-gray-700 block px-4 py-2 text-sm">Profile</Link>
                         <Link href={"/order"} className="text-gray-700 block px-4 py-2 text-sm">Order</Link>
                         {
-                            props.role === "admin" && <Link href={"/admin/users"} className="text-gray-700 block px-4 py-2 text-sm">Admin</Link>
+                            props.role === "admin" && <Link href={"/admin"} className="text-gray-700 block px-4 py-2 text-sm">Admin</Link>
                         }
                         <button type="button" className="text-gray-700 block w-full px-4 py-2 text-left text-sm" onClick={() => signOut()}>Sign out</button>
                     </div>

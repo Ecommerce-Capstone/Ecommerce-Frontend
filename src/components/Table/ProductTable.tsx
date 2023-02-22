@@ -20,6 +20,7 @@ const ProductTable = ({products, confirmDeleteProductHandler}:ProductTableProps)
                     <th className="px-4 py-2">Name</th>
                     <th className="px-4 py-2">Price</th>
                     <th className="px-4 py-2">Stock</th>
+                    <th className="px-4 py-2">Sold</th>
                     <th className="px-4 py-2">Description</th>
                     <th className="px-4 py-2">Actions</th>
                 </tr>
@@ -34,6 +35,7 @@ const ProductTable = ({products, confirmDeleteProductHandler}:ProductTableProps)
                             <td className="border px-4 py-2">{product.name}</td>
                             <td className="border px-4 py-2">{idr(product.price)}</td>
                             <td className="border px-4 py-2">{product.stock}</td>
+                            <td className="border px-4 py-2">{product.sold}</td>
                             <td className="border px-4 py-2">{product.description}</td>
                             <td className="border px-4 py-2">
                                 <Link href={`/admin/product/${product.id}`} className="mr-4">
