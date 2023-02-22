@@ -13,6 +13,7 @@ import ConfirmDeleteProduct from "@/components/Modal/ConfirmDeleteProduct";
 import Alert from "@/components/Alert";
 import Link from "next/link";
 import Button from "@/components/Button";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>([])
@@ -82,6 +83,7 @@ const ProductsPage = () => {
                 <meta property="og:title" content="Products" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 mx-auto flex justify-center">
                     <section className="w-full text-gray-600 body-font overflow-hidden">
                         <div className="px-5 py-12">

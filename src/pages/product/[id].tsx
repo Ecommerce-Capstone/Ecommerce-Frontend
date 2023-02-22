@@ -21,24 +21,24 @@ interface ProductDetailPageProps {
 }
 
 const ProductDetailPage = ({ productId }: ProductDetailPageProps) => {
-    console.log("product id >> ", productId)
     const {data:session, status} = useSession()
     const [count, setCount] = useState(1);
     const [product, setProduct] = useState<IProduct>({
         categoryId: 0,
         description: "",
         id: "",
-        images: "",
+        images: "/illustration/images.svg",
         name: "",
         price: 0,
-        stock: 0
+        stock: 0,
+        sold: 0
     })
     const [isCartLoading, setIsCartLoading] = useState(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
         getProduct()
-    }, [])
+    }, [productId])
 
     const getProduct = async () => {
         try {
@@ -70,7 +70,6 @@ const ProductDetailPage = ({ productId }: ProductDetailPageProps) => {
             toast(e.message, {
                 type: "error"
             });
-            console.log("error >> ", e)
         } finally {
             setIsCartLoading(false)
         }

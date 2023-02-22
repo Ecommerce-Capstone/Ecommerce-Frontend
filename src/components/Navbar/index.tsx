@@ -19,7 +19,7 @@ const Navbar = () => {
 
     const searchKeywordChangeHandler = () => {
         dispatch(setKeyword(search))
-        if (!router.pathname.includes("/product")){
+        if (router.pathname !== "/product"){
             return router.push("/product")
         }
     }

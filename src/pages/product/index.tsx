@@ -13,9 +13,13 @@ import {api, cn} from "@/utils";
 import BasicSelect from "@/components/Input/BasicSelect";
 import {useSelector} from "react-redux";
 
-const ProductPage = () => {
+interface ProductPageProps {
+    categoryIdParam?: number
+}
+
+const ProductPage = ({categoryIdParam}:ProductPageProps) => {
     const [categories, setCategories] = useState<IProductCategory[]>([])
-    const [categoryId, setCategoryId] = useState(0)
+    const [categoryId, setCategoryId] = useState(categoryIdParam)
     const keyword = useSelector((state: any) => state.search.keyword)
     const [sort, setSort] = useState("")
 
@@ -28,7 +32,7 @@ const ProductPage = () => {
             const response = await api.get(`/products/categories`)
             setCategories(response.data.data)
         } catch (e){
-            console.log("e")
+
         }
     }
 
@@ -48,7 +52,7 @@ const ProductPage = () => {
                         {
                             categories.map(category => (
                                 <button key={category.id} type="button" onClick={() => setCategoryId(category.id)}
-                                        className={cn("py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 bg-white rounded-full border border-gray-200", categoryId === category.id && "bg-orange-300")}>{category.name}
+                                        className={cn("py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 bg-white rounded-full border border-gray-200", categoryId == category.id && "bg-orange-300")}>{category.name}
                                 </button>
                             ))
                         }
@@ -63,6 +67,15 @@ const ProductPage = () => {
             </Layout>
         </>
     )
+}
+
+export async function getServerSideProps(context: { query: { categoryId: number; }; }) {
+    const  { categoryId } = context.query;
+    return {
+        props: {
+            categoryIdParam: categoryId ?? 0
+        }
+    }
 }
 
 export default ProductPage

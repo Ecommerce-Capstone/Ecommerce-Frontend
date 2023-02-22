@@ -4,5 +4,6 @@ export interface IOrder {
     status: string,
     user: any,
     total: number,
-    paymentUrl: string
+    paymentUrl: string,
+    createdAt: number
 }

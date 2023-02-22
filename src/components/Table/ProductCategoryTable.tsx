@@ -25,7 +25,13 @@ const ProductCategoryTable = ({productCategories, confirmDeleteProductCategoryHa
                 {
                     productCategories.map((productCategory, index) => (
                         <tr key={productCategory.id} className={cn(index % 2 === 0 && 'bg-gray-100')}>
+                            <td className="border px-4 py-2">
+                                {
+                                    <Image src={productCategory.image} alt={productCategory.name} height={100} width={100} />
+                                }
+                            </td>
                             <td className="border px-4 py-2">{productCategory.name}</td>
+                            <td className="border px-4 py-2">{productCategory.description}</td>
                             <td className="border px-4 py-2">
                                 <Link href={`/admin/product/category/${productCategory.id}`} className="mr-4">
                                     <Button

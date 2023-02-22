@@ -20,12 +20,13 @@ import {useRouter} from "next/router";
 import {IProductCategory} from "@/types/IProductCategory";
 import Alert from "@/components/Alert";
 import BasicSelect from "@/components/Input/BasicSelect";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 
 const ProductPage = () => {
     const router = useRouter();
     const [error, setError] = useState("")
-    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0, categoryId: 0})
+    const [product, setProduct] = useState<IProduct>({description: "", id: "", images: "", name: "", price: 0, stock: 0, sold: 0, categoryId: 0})
     const [productCategories, setProductCategories] = useState<IProductCategory[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [isImageLoading, setIsImageLoading] = useState(false)
@@ -73,7 +74,6 @@ const ProductPage = () => {
         setIsLoading(true);
         try {
             const data = await api.post(`/products`, formData);
-            console.log("data >> ", data)
             toast(`Product successfully created!`, {
                 type: "success"
             });
@@ -114,10 +114,11 @@ const ProductPage = () => {
     return (
         <>
             <Head>
-                <title>Product Return</title>
+                <title>Create Product</title>
                 <meta property="og:title" content="Product Return" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 py-24 mx-auto flex justify-center">
                     <div className="w-full flex">
                         <div className="w-3/12">

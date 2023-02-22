@@ -13,6 +13,7 @@ import Button from "@/components/Button";
 import {IProductCategory} from "@/types/IProductCategory";
 import ProductCategoryTable from "@/components/Table/ProductCategoryTable";
 import ConfirmDeleteProductCategory from "@/components/Modal/ConfirmDeleteProductCategory";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 const ProductCategoriesPage = () => {
     const [productCategories, setProductCategories] = useState<IProductCategory[]>([])
@@ -55,7 +56,6 @@ const ProductCategoriesPage = () => {
     }
 
     const confirmDeleteProductCategory = (productCategoryId: number) => {
-        console.log("product category >> ", productCategoryId)
         setPendingDeletedProductCategoryId(productCategoryId)
     }
 
@@ -83,6 +83,7 @@ const ProductCategoriesPage = () => {
                 <meta property="og:title" content="Products" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 mx-auto flex justify-center">
                     <section className="w-full text-gray-600 body-font overflow-hidden">
                         <div className="px-5 py-12">

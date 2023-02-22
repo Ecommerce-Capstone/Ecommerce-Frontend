@@ -48,8 +48,8 @@ const SigninPage = () => {
     async function onFormSubmit(formData: any) {
         setIsLoading(true);
         try {
-            const data = await api.post("/users", formData);
-            toast(`Welcome Aboard ${data.data.email}! Please login with your credentials`, {
+            const response = await api.post("/users", formData);
+            toast(`Selamat Datang ${response.data.data.email}! Silakan login menggunakan credentials anda`, {
                 type: "success"
             });
             setTimeout(() => {

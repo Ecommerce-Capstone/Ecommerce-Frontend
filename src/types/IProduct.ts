@@ -5,6 +5,7 @@ interface IProduct {
     images: string;
     price: number;  
     stock: number;
+    sold: number;
     categoryId: number;
 }
 

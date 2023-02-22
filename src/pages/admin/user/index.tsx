@@ -11,6 +11,7 @@ import UserTable from "@/components/Table/UserTable";
 import Spinner from "@/components/Spinner";
 import ConfirmDeleteUser from "@/components/Modal/ConfirmDeleteUser";
 import Alert from "@/components/Alert";
+import AdminNavbar from "@/components/Navbar/AdminNavbar";
 
 const UsersPage = () => {
     const [users, setUsers] = useState<IUser[]>([])
@@ -79,6 +80,7 @@ const UsersPage = () => {
                 <meta property="og:title" content="Login" key="title"/>
             </Head>
             <Layout>
+                <AdminNavbar />
                 <div className="container w-full px-5 mx-auto flex justify-center">
                     <section className="w-full text-gray-600 body-font overflow-hidden">
                         <div className="px-5 py-12">
