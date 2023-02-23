@@ -27,7 +27,6 @@ const ApiClient = () => {
             if (error?.response?.status === 403){
                 return signOut()
             }
-            console.log(`error`, error);
             throw new AxiosError(error);
         },
     );

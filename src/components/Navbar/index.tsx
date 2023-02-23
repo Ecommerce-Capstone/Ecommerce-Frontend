@@ -2,7 +2,7 @@ import 'boxicons/css/boxicons.min.css'
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Link from "next/link";
-import {signIn, signOut, useSession} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 import UserDropdown from "@/components/Navbar/UserDropdown";
 import {useDispatch, useSelector} from "react-redux";
 import {setKeyword} from "@/store/search";

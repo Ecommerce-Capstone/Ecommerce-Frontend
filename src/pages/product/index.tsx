@@ -1,16 +1,9 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import Alert from "@/components/Alert";
-import BasicInput from "@/components/Input/BasicInput";
-import Button from "@/components/Button";
-import Link from "next/link";
 import Catalog from "@/components/Catalog";
 import React, {useEffect, useState} from "react";
-import {IPage} from "@/types/IPage";
-import Pagination from "@/components/Pagination";
 import {IProductCategory} from "@/types/IProductCategory";
 import {api, cn} from "@/utils";
-import BasicSelect from "@/components/Input/BasicSelect";
 import {useSelector} from "react-redux";
 
 interface ProductPageProps {

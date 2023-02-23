@@ -1,6 +1,5 @@
 import 'boxicons/css/boxicons.min.css'
 import {useRouter} from "next/router";
-import {useSession} from "next-auth/react";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {setKeyword} from "@/store/search";
