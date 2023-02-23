@@ -1,3 +1,4 @@
+import 'boxicons/css/boxicons.min.css'
 import Layout from "@/components/Layout";
 import React, {useEffect, useState} from "react";
 import {IOrderItem} from "@/types/IOrderItem";
@@ -107,9 +108,11 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
                                         <div className="flex-1 ltr:text-right rtl:text-left">
                                             {order.status}
                                             {
-                                                order.status === "UNPAID" && <span>
+                                                order.status === "UNPAID" && <span className="block">
                                                 <br/>
-                                                <Link href={order.paymentUrl} target="_blank" className="text-blue-500 font-medium">Bayar</Link>
+                                                <Link href={order.paymentUrl} target="_blank" className="px-3 py-2 text-xs font-medium text-center text-white bg-red-600 rounded hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300">
+                                                    Bayar <i className="bx bx-credit-card ml-4"/><i className="bx bxs-right-arrow"/>
+                                                </Link>
                                                 </span>
                                             }
                                         </div>
