@@ -30,6 +30,18 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
         connectWs()
     }, [])
 
+    useEffect(() => {
+        countTotal()
+    }, [orderItem])
+
+    const countTotal = () => {
+        let t = 0;
+        orderItem.map(oi => {
+            t += oi.price * oi.quantity
+        })
+        setTotal(t)
+    }
+
     const getOrder = async () => {
         try {
             const response = await api.get(`/orders/${orderId}`)
@@ -43,7 +55,6 @@ const InvoicePage = ({orderId}: InvoicePageProps) => {
         try {
             const response = await api.get(`/orders/${orderId}/items`)
             setOrderItem(response.data.data)
-            setTotal(_.sumBy(response.data.data, 'price'))
         } catch (e) {
 
         }
