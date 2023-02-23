@@ -20,13 +20,15 @@ const HighlightCategory = () => {
         }
     }
 
+    const colors = ["bg-lime-200", "bg-red-200", "bg-blue-200", "bg-slate-200"]
+
     return (
         <>
             <div className="container mx-auto">
                 <div className="flex justify-evenly gap-5 mb-12">
                     {
-                        categories.map(category => (
-                            <CategoryItem key={category.id} category={category} />
+                        categories.map((category, index) => (
+                            <CategoryItem key={category.id} category={category} color={colors[index]} />
                         ))
                     }
                 </div>
