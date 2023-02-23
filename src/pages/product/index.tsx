@@ -60,6 +60,7 @@ const ProductPage = ({categoryIdParam}:ProductPageProps) => {
                             <option value="">Rekomendasi</option>
                             <option value="price,desc">Harga Tertinggi</option>
                             <option value="price,asc">Harga Terrendah</option>
+                            <option value="sold,desc">Paling Laris</option>
                         </select>
                     </div>
                     <Catalog size={12} categoryId={categoryId} search={keyword} sort={sort} enablePagination={true} />
