@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import {IProductCategory} from "@/types/IProductCategory";
+import {cn} from "@/utils";
 
 interface CategoryItemProps {
-    category: IProductCategory
+    category: IProductCategory,
+    color: string
 }
 
-const CategoryItem = ({category}: CategoryItemProps) => {
+const CategoryItem = ({category, color}: CategoryItemProps) => {
     return (
         <>
             <Link className="w-full group flex" href={`/product?categoryId=${category.id}`}>
-                <div className="relative flex items-center w-full overflow-hidden bg-lime-200">
+                <div className={cn("relative flex items-center w-full overflow-hidden", color)}>
                     <div className="flex shrink-0 w-36 lg:w-32 xl:w-40 2xl:w-36 3xl:w-[180px] ltr:pr-1.5 rtl:pl-1.5 2xl:ltr:pr-2.5 2xl:rtl:pl-2.5">
                         <Image src={category.image} alt={""} width={100} height={100} className="ml-2 transform transition duration-500 scale-75 hover:scale-100" />
                     </div>
