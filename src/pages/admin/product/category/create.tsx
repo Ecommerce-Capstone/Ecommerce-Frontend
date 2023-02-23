@@ -5,7 +5,7 @@ import Button from "@/components/Button";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {api} from '@/utils'
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

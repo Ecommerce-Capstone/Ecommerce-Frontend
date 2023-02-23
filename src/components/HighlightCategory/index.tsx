@@ -1,4 +1,3 @@
-import Image from "next/image";
 import CategoryItem from "@/components/HighlightCategory/CategoryItem";
 import {useEffect, useState} from "react";
 import {api} from "@/utils";

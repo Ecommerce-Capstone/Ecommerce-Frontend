@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import React, {useEffect, useState} from "react";
-import Link from "next/link";
 import AdminNavbar from "@/components/Navbar/AdminNavbar";
 import 'boxicons/css/boxicons.min.css'
 import BasicWidget from "@/components/Card/BasicWidget";

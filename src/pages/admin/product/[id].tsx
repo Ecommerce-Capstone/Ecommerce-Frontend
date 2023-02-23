@@ -7,14 +7,10 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import BasicTextArea from "@/components/Input/BasicTextArea";
 import React, {useEffect, useRef, useState} from "react";
-import {useSession} from "next-auth/react";
 import {api} from '@/utils'
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loading from "@/views/Loading";
-import Unauthenticated from "@/views/Unauthenticated";
 import Image from "next/image";
-import {IUser} from "@/types/IUser";
 import IProduct from "@/types/IProduct";
 import {useRouter} from "next/router";
 import {IProductCategory} from "@/types/IProductCategory";

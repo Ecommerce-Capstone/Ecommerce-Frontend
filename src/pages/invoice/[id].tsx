@@ -4,8 +4,6 @@ import {IOrderItem} from "@/types/IOrderItem";
 import {IOrder} from "@/types/IOrder";
 import {api, idr} from "@/utils";
 import Link from "next/link";
-import Button from "@/components/Button";
-import _ from "lodash"
 import {Stomp} from "@stomp/stompjs";
 // @ts-ignore
 import * as SockJS from 'sockjs-client';

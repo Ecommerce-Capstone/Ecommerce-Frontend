@@ -2,7 +2,6 @@ import {cn} from "@/utils";
 import Link from "next/link";
 import Button from "@/components/Button";
 import React from "react";
-import IProduct from "@/types/IProduct";
 import Image from "next/image";
 import {IProductCategory} from "@/types/IProductCategory";
 

@@ -4,13 +4,9 @@ import {IOrder} from "@/types/IOrder";
 import {api} from "@/utils";
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import Link from "next/link";
-import Button from "@/components/Button";
 import Alert from "@/components/Alert";
 import Spinner from "@/components/Spinner";
-import ProductTable from "@/components/Table/ProductTable";
 import Pagination from "@/components/Pagination";
-import ConfirmDeleteProduct from "@/components/Modal/ConfirmDeleteProduct";
 import OrderTable from "@/components/Table/OrderTable";
 import AdminNavbar from "@/components/Navbar/AdminNavbar";
 

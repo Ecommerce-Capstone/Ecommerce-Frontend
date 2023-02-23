@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import React, {useEffect, useState} from "react";
-import {api, cn} from "@/utils";
+import {api} from "@/utils";
 import Pagination from "@/components/Pagination";
 import IProduct from "@/types/IProduct";
 import {IPage} from "@/types/IPage";
