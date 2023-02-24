@@ -120,7 +120,7 @@ const ProductPage = () => {
                         <div className="w-3/12">
                             <div className="px-8 relative">
                                 {
-                                    product.images ? <Image className="rounded w-full" src={product.images} alt={product.name} width={400} height={400} /> : <Image className="rounded w-full" src="/select_image.png" alt={product.name} width={400} height={400} />
+                                    product.images ? <Image className="rounded w-full" src={product.images ?? "/illustration/images.svg"} alt={product.name} width={400} height={400} /> : <Image className="rounded w-full" src="/select_image.png" alt={product.name} width={400} height={400} />
                                 }
                                 <div className="absolute bottom-1 right-8">
                                     <input type="file" className="hidden" ref={inputFileRef} onChange={() => onFileChange(event)} />

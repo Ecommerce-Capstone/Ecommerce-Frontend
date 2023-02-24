@@ -129,7 +129,7 @@ const ProfilePage = () => {
                         <div className="w-3/12">
                             <div className="px-8 relative">
                                 {
-                                    <Image className="rounded w-full" src={user.photo} alt={user.fullName} width={400} height={400} />
+                                    <Image className="rounded w-full" src={user.photo ?? "/illustration/images.svg"} alt={user.fullName} width={400} height={400} />
                                 }
                                 <div className="absolute bottom-1 right-8">
                                     <input type="file" className="hidden" ref={inputFileRef} onChange={() => onFileChange(event)} />

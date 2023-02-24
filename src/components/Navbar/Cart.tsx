@@ -25,7 +25,7 @@ const Cart = () => {
             })
             dispatch(setInitialCart(response.data.data.length))
         } catch (e){
-            console.log("error >> ", e)
+
         }
     }
 
