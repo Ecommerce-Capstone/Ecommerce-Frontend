@@ -90,7 +90,7 @@ const ProductDetailPage = ({ productId }: ProductDetailPageProps) => {
                     <section className="text-gray-600 body-font overflow-hidden">
                         <div className="px-5 py-12">
                             <div className="flex flex-wrap">
-                                <Image src={product.images} alt={product.name} width={400} height={400} className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"/>
+                                <Image src={product.images ?? "/illustration/images.svg"} alt={product.name} width={400} height={400} className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"/>
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                                     <div className="pb-5">
                                         <div className="mb-2 md:mb-2.5 block -mt-1.5" role="button">

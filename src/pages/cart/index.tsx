@@ -115,7 +115,7 @@ const CartPage = () => {
                                 {
                                     carts.map((cart, index) => (
                                         <div key={cart.id} className="flex items-center py-2 border-b border-gray-200">
-                                            <Image src={cart.product.images} alt="a" width={50} height={50} className="w-20 h-20"/>
+                                            <Image src={cart.product.images ?? "/illustration/images.svg"} alt="a" width={50} height={50} className="w-20 h-20"/>
                                             <div className="flex-1 ml-4">
                                                 <p className="text-lg font-medium">{cart.product.name}</p>
                                                 <p className="text-gray-500">{idr(cart.product.price)}</p>
